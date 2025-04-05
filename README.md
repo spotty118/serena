@@ -126,7 +126,7 @@ Serena can read, write and execute code, read logs and the terminal output.
 
 ### MCP Server (Claude Desktop)
 
-1. Install `uv` (instructions [here](https://docs.astral.sh/uv/getting-started/installation/))
+1. Install `poetry` (instructions [here](https://python-poetry.org/docs/#installation))
 2. Clone the repository to `/path/to/serena`.
 3. Create a configuration file for your project, say `myproject.yml` based on the template in [myproject.demo.yml](myproject.demo.yml).
 4. Configure the MCP server in your client.  
@@ -137,8 +137,9 @@ Serena can read, write and execute code, read logs and the terminal output.
    {
        "mcpServers": {
            "serena": {
-               "command": "/abs/path/to/uv",
-               "args": ["run", "--directory", "/abs/path/to/serena", "serena-mcp-server", "/abs/path/to/myproject.yml"]
+               "command": "poetry", // Ensure poetry is in your PATH
+               "args": ["run", "serena-mcp-server", "/abs/path/to/myproject.yml"],
+               "cwd": "/abs/path/to/serena" // Specify the working directory for poetry
            }
        }
    }
@@ -187,7 +188,7 @@ Here's how it works (see also [Agno's documentation](https://docs.agno.com/intro
 2. Install serena with the optional requirements:
    ```shell
    # You can also only select agno,google or agno,anthropic instead of all-extras
-   uv pip install --all-extras -r pyproject.toml -e .
+   poetry install --all-extras
    ```
    
 3. Copy `.env.example` to `.env` and fill in the API keys for the provider(s) you
@@ -195,7 +196,7 @@ Here's how it works (see also [Agno's documentation](https://docs.agno.com/intro
 
 5. Start the agno agent app with
    ```shell
-   uv run python scripts/agno_agent.py
+   poetry run python scripts/agno_agent.py
    ```
    By default, the script uses Claude as the model, but you can choose any model
    supported by Agno (which is essentially any existing model).
@@ -496,7 +497,7 @@ For details on contributing, see [here](/CONTRIBUTING.md).
 
 ## Full List of Tools
 
-Here the full list of Serena's default tools with a short description (the output of `uv run serena-list-tools`)
+Here the full list of Serena's default tools with a short description (the output of `poetry run serena-list-tools`)
 
  * `check_onboarding_performed`: Checks whether the onboarding was already performed.
  * `create_text_file`: Creates/overwrites a file in the project directory.
@@ -523,4 +524,3 @@ Here the full list of Serena's default tools with a short description (the outpu
  * `think_about_task_adherence`: Thinking tool for determining whether the agent is still on track with the current task.
  * `think_about_whether_you_are_done`: Thinking tool for determining whether the task is truly completed.
  * `write_memory`: Writes a named memory (for future reference) to Serena's project-specific memory store.
-

@@ -6,24 +6,24 @@ Feel free to share your learnings by opening open new issues, feature requests a
 
 ## Developer Environment Setup
 
-You can have a local setup via `uv` or a docker interpreter-based setup. 
+You can have a local setup via `poetry` or a docker interpreter-based setup. 
 The repository is also configured to seamlessly work within a GitHub Codespace. See the instructions
 for the various setup scenarios below.
 
 Independently of how the setup was done, the virtual environment can be 
-created and activated via `uv` (see below), and the various tasks like formatting, testing, and documentation building
+created and activated via `poetry` (see below), and the various tasks like formatting, testing, and documentation building
 can be executed using `poe`. For example, `poe format` will format the code, including the 
 notebooks. Just run `poe` to see the available commands.
 
-### Python (uv) setup
+### Python (Poetry) setup
 
-You can install a virtual environment with the required as follows
+You can install a virtual environment with the required dependencies as follows:
 
-1. Create a new virtual environment: `uv venv`
-2. Activate the environment:
+1. Install Poetry (if not already installed): [Official Documentation](https://python-poetry.org/docs/#installation)
+2. Activate the environment managed by Poetry: (Poetry typically manages this automatically, but you can activate it manually if needed)
     * On Linux/Unix/macOS: `source .venv/bin/activate`
-    * On Windows: `.venv\Scripts\activate.bat`
-3. Install the required packages with all extras: `uv pip install --all-extras -r pyproject.toml -e .`
+    * On Windows: `.venv\Scripts\activate.bat` (Or use `poetry shell`)
+3. Install dependencies (including extras and the project itself in editable mode): `poetry install --all-extras`
 
 ### Docker setup
 
